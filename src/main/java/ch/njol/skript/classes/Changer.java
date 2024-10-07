@@ -21,7 +21,7 @@ package ch.njol.skript.classes;
 import ch.njol.skript.util.ClassInfoReference;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import ch.njol.skript.classes.data.DefaultChangers;
 import ch.njol.skript.lang.Expression;
