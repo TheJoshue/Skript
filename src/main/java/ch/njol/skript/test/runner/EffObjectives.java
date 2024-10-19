@@ -112,4 +112,24 @@ public class EffObjectives extends Effect  {
 		}
 	}
 
+	/**
+	 * Returns an array string containing all the objectives that the current
+	 * JUnit test failed to accomplish in the given time.
+	 * 
+	 * @return
+	 */
+	public static String getFailedObjectivesString() {
+		StringBuilder builder = new StringBuilder();
+		for (String test : requirements.keySet()) {
+			if (!completeness.containsKey(test)) {
+				builder.append("JUnit test '" + test + "' didn't complete any objectives.");
+				continue;
+			}
+			List<String> failures = Lists.newArrayList(requirements.get(test));
+			failures.removeAll(completeness.get(test));
+			builder.append("JUnit test '" + test + "' failed objectives: " + Arrays.toString(failures.toArray(new String[0])));
+		}
+		return builder.toString();
+	}
+
 }
