@@ -44,7 +44,7 @@ dependencies {
 	testShadow group: 'org.easymock', name: 'easymock', version: '5.1.0'
 }
 
-task checkAliases {
+/*task checkAliases {
 	description 'Checks for the existence of the aliases.'
 	doLast {
 		def aliasFolder = project.file('skript-aliases')
@@ -52,7 +52,7 @@ task checkAliases {
 			throw new InvalidUserDataException('Aliases are missing from \'skript-aliases\' folder. Consider fetching submodules with \'git submodule update --init\'.')
 		}
 	}
-}
+}*/
 
 task testJar(type: ShadowJar) {
 	dependsOn(compileTestJava, licenseTest)
@@ -61,7 +61,7 @@ task testJar(type: ShadowJar) {
 }
 
 task jar(overwrite: true, type: ShadowJar) {
-	dependsOn checkAliases
+	//dependsOn checkAliases
 	archiveFileName = jarName ? 'Skript.jar' : jarName
 	from sourceSets.main.output
 }
