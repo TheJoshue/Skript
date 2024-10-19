@@ -19,7 +19,8 @@
 /**
  * The main package for Skript's scheduling system.
  */
+//@NonNullByDefault({DefaultLocation.PARAMETER, DefaultLocation.RETURN_TYPE, DefaultLocation.FIELD})
 package org.skriptlang.skript.scheduler;
 
-import org.eclipse.jdt.annotation.DefaultLocation;
-import org.eclipse.jdt.annotation.NonNullByDefault;
+//import org.eclipse.jdt.annotation.DefaultLocation;
+//import org.eclipse.jdt.annotation.NonNullByDefault;
