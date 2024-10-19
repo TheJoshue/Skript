@@ -29,8 +29,8 @@ dependencies {
 	shadow group: 'io.papermc', name: 'paperlib', version: '1.0.8'
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.2'
-	shadow group: 'com.h2database', name: 'h2', version: '2.3.232'
-	shadow group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
+	shadow group: 'com.h2database', name: 'h2', version: '2.1.214'
+	shadow group: 'com.zaxxer', name: 'HikariCP', version: '5.0.1'
 	implementation group: 'io.papermc.paper', name: 'paper-api', version: '1.21-R0.1-SNAPSHOT'
 	//implementation group: 'io.papermc.paper', name: 'paper-api', version: '1.20.1-R0.1-SNAPSHOT'
 	implementation group: 'dev.folia', name: 'folia-api', version: '1.20.1-R0.1-SNAPSHOT'
@@ -257,7 +257,7 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	options.compilerArgs += ['-source', '' + latestJava, '-target', '' + latestJava]
+	options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
 }
 
 compileJava.options.encoding = 'UTF-8'
