@@ -464,6 +464,7 @@ public abstract class EntityData<E extends Entity> implements SyntaxElement, Ygg
 			}
 			set(entity);
 		}, null, 0);
+		return entity;
 	}
 
 	/**
