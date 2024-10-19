@@ -28,7 +28,8 @@ dependencies {
 	shadow group: 'io.papermc', name: 'paperlib', version: '1.0.8'
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.0'
-
+	shadow group: 'com.h2database', name: 'h2', version: '2.1.214'
+	shadow group: 'com.zaxxer', name: 'HikariCP', version: '5.0.1'
 	implementation group: 'dev.folia', name: 'folia-api', version: '1.20.1-R0.1-SNAPSHOT'
 	implementation group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.700'
 	implementation group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
@@ -90,6 +91,8 @@ tasks.withType(ShadowJar) {
 		include(dependency('org.bstats:bstats-bukkit'))
 		include(dependency('org.bstats:bstats-base'))
 		include(dependency('net.kyori:adventure-text-serializer-bungeecord'))
+        include(dependency('com.h2database:h2'))
+        include(dependency('com.zaxxer:HikariCP'))
 	}
 	relocate 'io.papermc.lib', 'ch.njol.skript.paperlib'
 	relocate 'org.bstats', 'ch.njol.skript.bstats'
@@ -294,6 +297,15 @@ tasks.register('JUnit') {
 	dependsOn JUnitJava8, JUnitJava17
 }
 
+// Generic replace tokens, e.g: '@version@'
+tasks.withType(Copy).configureEach {
+	filter(ReplaceTokens, tokens: [
+		'today'            : '' + LocalTime.now(),
+		'h2.version'       : project.property('h2.version'),
+		'hikaricp.version' : project.property('hikaricp.version')
+	])
+}
+
 // Build flavor configurations
 task githubResources(type: ProcessResources) {
 	from 'src/main/resources', {
@@ -306,7 +318,6 @@ task githubResources(type: ProcessResources) {
 			channel = 'beta'
 		filter ReplaceTokens, tokens: [
 			'version'         : version,
-			'today'           : '' + LocalTime.now(),
 			'release-flavor'  : 'skriptlang-github', // SkriptLang build, distributed on Github
 			'release-channel' : channel, // Release channel, see above
 			'release-updater' : 'ch.njol.skript.update.GithubChecker', // Github API client
@@ -341,7 +352,6 @@ task spigotResources(type: ProcessResources) {
 			channel = 'beta'
 		filter ReplaceTokens, tokens: [
 			'version'         : version,
-			'today'           : '' + LocalTime.now(),
 			'release-flavor'  : 'skriptlang-spigot', // SkriptLang build, distributed on Spigot resources
 			'release-channel' : channel, // Release channel, see above
 			'release-updater' : 'ch.njol.skript.update.GithubChecker', // Github API client
@@ -372,7 +382,6 @@ task nightlyResources(type: ProcessResources) {
 		version = project.property('version') + '-nightly-' + hash
 		filter ReplaceTokens, tokens: [
 			'version'         : version,
-			'today'           : '' + LocalTime.now(),
 			'release-flavor'  : 'skriptlang-nightly', // SkriptLang build, automatically done by CI
 			'release-channel' : 'alpha', // No update checking, but these are VERY unstable
 			'release-updater' : 'ch.njol.skript.update.NoUpdateChecker', // No autoupdates for now
