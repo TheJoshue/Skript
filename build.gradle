@@ -257,7 +257,7 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
+	options.compilerArgs += ['-source', '' + latestJava, '-target', '' + latestJava]
 }
 
 compileJava.options.encoding = 'UTF-8'
