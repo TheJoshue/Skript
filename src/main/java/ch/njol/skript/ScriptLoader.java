@@ -18,6 +18,7 @@
  */
 package ch.njol.skript;
 
+import ch.njol.skript.ScriptLoader.ScriptInfo;
 import ch.njol.skript.config.Config;
 import ch.njol.skript.config.Node;
 import ch.njol.skript.config.SectionNode;
@@ -706,15 +707,11 @@ public class ScriptLoader {
 			
 			return null;
 		};
-		if (isAsync()) { // Need to delegate to main thread
-			Task.callSync(callable);
-		} else { // We are in main thread, execute immediately
-			try {
-				callable.call();
-			} catch (Exception e) {
-				//noinspection ThrowableNotThrown
-				Skript.exception(e);
-			}
+		try {
+			callable.call();
+		} catch (Exception e) {
+			//noinspection ThrowableNotThrown
+			Skript.exception(e);
 		}
 
 		return new LoadingScriptInfo(script, structures, nodeMap);

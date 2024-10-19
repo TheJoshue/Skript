@@ -30,7 +30,7 @@ dependencies {
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.2'
 
-	implementation group: 'io.papermc.paper', name: 'paper-api', version: '1.21-R0.1-SNAPSHOT'
+	implementation group: 'dev.folia', name: 'folia-api', version: '1.21.1-R0.1-SNAPSHOT'
 	implementation group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 	implementation group: 'com.sk89q.worldguard', name: 'worldguard-legacy', version: '7.0.0-SNAPSHOT'
 	implementation group: 'net.milkbowl.vault', name: 'Vault', version: '1.7.3', {
@@ -261,6 +261,7 @@ compileTestJava.options.encoding = 'UTF-8'
 String environments = 'src/test/skript/environments/';
 String env = project.property('testEnv') == null ? latestEnv : project.property('testEnv') + '.json'
 int envJava = project.property('testEnvJavaVersion') == null ? latestJava : Integer.parseInt(project.property('testEnvJavaVersion') as String)
+createTestTask('foliaTest', 'Runs tests on one environment being the latest supported Java and Minecraft on Folia.', environments + 'java17/folia.json', latestJava)
 createTestTask('quickTest', 'Runs tests on one environment being the latest supported Java and Minecraft.', environments + latestEnv, latestJava, 0)
 createTestTask('skriptTestJava21', 'Runs tests on all Java 21 environments.', environments + 'java21', java21, 0)
 createTestTask('skriptTestJava17', 'Runs tests on all Java 17 environments.', environments + 'java17', java17, 0)
